@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Animal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Animal Sanctuary</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/register}" th:if="${not #authorization.expression('isAuthenticated()')}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/login}" th:if="${not #authorization.expression('isAuthenticated()')}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/animals}" th:if="${#authorization.expression('isAuthenticated()')}">Animals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/visits}" th:if="${#authorization.expression('isAuthenticated()')}">Visits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/users}" th:if="${#authorization.expression('isAuthenticated()')}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/profile}" th:if="${#authorization.expression('isAuthenticated()')}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1>Edit Animal</h1>
+    <form th:action="@{/animals/update/{id}(id=${animal.id})}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control" th:value="${animal.name}" required>
+        </div>
+        <div class="mb-3">
+            <label for="species" class="form-label">Species</label>
+            <input type="text" id="species" name="species" class="form-control" th:value="${animal.species}" required>
+        </div>
+        <div class="mb-3">
+            <label for="breed" class="form-label">Breed</label>
+            <input type="text" id="breed" name="breed" class="form-control" th:value="${animal.breed}" required>
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" id="age" name="age" class="form-control" th:value="${animal.age}" required>
+        </div>
+        <div class="mb-3">
+            <label for="adoptionStatus" class="form-label">Adoption Status</label>
+            <select class="form-select" id="adoptionStatus" name="adoptionStatus" required>
+                <option value="" disabled selected>Select Adoption Status</option>
+                <option value="Available For Adoption">Available For Adoption</option>
+                <option value="Not Available For Adoption">Not Available For Adoption</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" name="description" class="form-control" rows="4" required th:text="${animal.description}"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">Animal Image</label>
+            <input type="file" id="file" name="file" class="form-control">
+        </div>
+        <input type="hidden" name="_method" value="post">
+        <button type="submit" class="btn btn-primary">Update Animal</button>
+        <a href="/animals/details/{id}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-d7WLRDFPaTOeUBX+nS8uwDRa06WgV5Z1ztbEJrLz5EoOiYde5Lut8g8JJGvF7ovT" crossorigin="anonymous"></script>
+</body>
+</html>

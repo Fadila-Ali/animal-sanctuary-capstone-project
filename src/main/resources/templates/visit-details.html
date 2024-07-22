@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Animal Sanctuary</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/register}" th:if="${not #authorization.expression('isAuthenticated()')}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/login}" th:if="${not #authorization.expression('isAuthenticated()')}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/animals}" th:if="${#authorization.expression('isAuthenticated()')}">Animals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/volunteers}" th:if="${#authorization.expression('isAuthenticated()')}">Volunteers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/visits}" th:if="${#authorization.expression('isAuthenticated()')}">Visits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/users}" th:if="${#authorization.expression('isAuthenticated()')}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/profile}" th:if="${#authorization.expression('isAuthenticated()')}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h1 class="mb-4">Visit Details</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Visit ID: <span th:text="${visit.id}">1</span></h5>
+            <p class="card-text">Start Time: <span th:text="${visit.startTime}">2024-08-01T09:00</span></p>
+            <p class="card-text">End Time: <span th:text="${visit.endTime}">2024-08-01T10:00</span></p>
+            <p class="card-text">Available: <span th:text="${visit.available ? 'Yes' : 'No'}"></span></p>
+            <a href="/visits" class="btn btn-secondary mt-3">Back to List</a>
+            <form th:action="@{/visits/cancel/{id}(id=${visit.id})}" method="post">
+                <button type="submit" class="btn btn-danger" th:if="${!visit.available}">Cancel Booking</button>
+            </form>
+            <form th:action="@{/visits/book/{id}(id=${visit.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-success btn-sm" th:if="${visit.available and #authorization.expression('hasRole(''ROLE_USER'')')}">Book</button>
+            </form>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a th:href="@{'/visits/edit/' + ${visit.id}}" class="btn btn-warning">Edit</a>
+                <form th:action="@{'/visits/delete/' + ${visit.id}}" method="post" style="display:inline;">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
