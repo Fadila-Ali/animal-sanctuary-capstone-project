@@ -1,38 +1,149 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Animal Sanctuary</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!--  <link type="text/css" th:href="@{/css/index.css}">-->
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Animal Sanctuary</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
-        </li>
+<nav class="navbar navbar-expand-lg navbar-light" style="display: flex; justify-content: space-between; align-items: center">
+  <div class="container-fluid" id="nav-flex" style="display: flex; justify-content: space-between; align-items: center">
+    <div class="social-icons">
+      <a href="#"><i style="color: black;" class="fab fa-twitter"></i></a>
+      <a href="#" class="mr-3"><i style="color: black;" class="fab fa-linkedin"></i></a>
+      <a href="#" class="mr-3"><i style="color: black;" class="fab fa-github"></i></a>
+      <a href="emailto:alifadila227@gmail.com"><i class="fa fa-envelope-o"></i></a>
+    </div>
+    <div>
+      <a class="navbar-brand" href="#"><h2>Furry Friends Sanctuary</h2></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="nav-button" style="">
+          <a class="nav-link" id="login" th:href="@{/login}"><button class="btn btn-info">Login</button></a>
+<!--          <a class="nav-link" th:href="@{/register}"><button class="btn btn-info">Register</button></a>-->
       </ul>
     </div>
   </div>
 </nav>
-<div class="container">
-  <div class="row">
-    <h1 class="text-center"> Welcome to Animal Sanctuary</h1>
+
+<!-- Hero Section -->
+<div class="hero-section">
+  <video id="background-video" style="width: 100vw;
+    height: 80vh;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 4rem;
+    bottom: 0;
+    z-index: -1;"
+         autoplay loop muted poster="/media/video.mp4">
+    <source src="/media/video.mp4" type="video/mp4">
+  </video>
+  <div class="container" id="hero" style="position: relative; top: 50vh; background: white; display: flex; flex-direction:column; justify-content: center; align-items: center; border-radius: 1rem">
+      <h1 style="max-width: 60vw; text-align: center">Save a Life, Find Your Furry Friend, and Make a Forever Difference</h1>
+      <p style="max-width: 40vw; text-align: center">Welcome to Furry Friends Sanctuary, where every animal deserves a loving home. Join us in our mission to provide care, shelter, and forever homes for animals in need.</p>
+      <a class="nav-link" th:href="@{/register}"><button class="btn btn-info">Register Now</button></a>
   </div>
 </div>
+
+<!-- Current Features Section -->
+<div class="container mt-5" style="position: relative; top: 20rem">
+  <h2 class="text-center">Features</h2>
+  <div class="features text-center" style="
+   display: flex;
+   gap: 2rem;">
+    <div class="col-md-4 feature" style="background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 1px 5px 10px gray;">
+      <div class="feature-icon mb-3">
+        <img src="/media/feature1.png" alt="feature-1" width="300" height="200" style="object-fit: contain"/>
+      </div>
+      <h4>Animal and Pets Listings</h4>
+      <p>View all animals available for adoption and sponsorship. Each listing includes detailed information about the animal's background, personality, and needs to help you make the perfect match.</p>
+    </div>
+    <div class="col-md-4 feature">
+      <div class="feature-icon mb-3">
+        <img src="/media/feature2.png" alt="feature-1" width="300" height="200" style="object-fit: contain"/>
+      </div>
+      <h4>Schedule in Person Visits</h4>
+      <p>Plan your visit to our sanctuary and meet the animals. Our easy-to-use scheduling system ensures that you can find a convenient time to come and interact with our furry friends in a safe and welcoming environment.</p>
+    </div>
+    <div class="col-md-4 feature">
+      <div class="feature-icon mb-3">
+        <img src="/media/feature3.png" alt="feature-1" width="300" height="200" style="object-fit: contain"/>
+      </div>
+      <h4>Volunteer Opportunities</h4>
+      <p>Sign up for various volunteer tasks and help us care for the animals. Whether you have a few hours a week or a few days a month, there are plenty of ways you can make a meaningful contribution to our sanctuary and the lives of our animals.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Purpose and Goals Section -->
+<div class="container mt-5 goals" style="
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+">
+  <h2 class="text-center">Our Purpose and Goals</h2>
+  <p class="text-center" style="max-width: 60%">At Animal Sanctuary, our mission is to provide a safe and loving environment for animals in need. We strive to rehabilitate, rehome, and raise awareness about animal welfare. Join us in our efforts to make a difference.</p>
+  <video id="goal" autoplay loop muted poster="/media/goals.mp4" style="width: 60vw; border-radius: 1rem">
+    <source src="/media/goals.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- Testimonials Section -->
+<!--<div class="container mt-5">-->
+<!--  <h2 class="text-center">What People Are Saying</h2>-->
+<!--  <div class="row text-center">-->
+<!--    <div class="col-md-4">-->
+<!--      <p class="testimonial">"Animal Sanctuary has changed my life. Volunteering here has been an incredibly rewarding experience."</p>-->
+<!--      <p>- Jane Doe</p>-->
+<!--    </div>-->
+<!--    <div class="col-md-4">-->
+<!--      <p class="testimonial">"The staff at Animal Sanctuary are so caring and dedicated. They truly make a difference for these animals."</p>-->
+<!--      <p>- John Smith</p>-->
+<!--    </div>-->
+<!--    <div class="col-md-4">-->
+<!--      <p class="testimonial">"Adopting from Animal Sanctuary was the best decision we made. Our new furry friend is now a part of our family."</p>-->
+<!--      <p>- Sarah Johnson</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!-- Future Features Section -->
+<!--<div class="container mt-5">-->
+<!--  <h2 class="text-center">Future Features</h2>-->
+<!--  <div class="row text-center">-->
+<!--    <div class="col-md-4">-->
+<!--      <h4>Expanded Volunteer Programs</h4>-->
+<!--      <p>We plan to offer more diverse and engaging volunteer opportunities.</p>-->
+<!--    </div>-->
+<!--    <div class="col-md-4">-->
+<!--      <h4>Online Donation Portal</h4>-->
+<!--      <p>Support our sanctuary with easy online donations and sponsorships.</p>-->
+<!--    </div>-->
+<!--    <div class="col-md-4">-->
+<!--      <h4>Virtual Tours</h4>-->
+<!--      <p>Experience our sanctuary from the comfort of your home with virtual tours.</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!-- Footer -->
+<div class="footer mt-3" style="text-align: center; background: #181818; color: white">
+  <p>&copy; 2024 Furry Friends Sanctuary. All Rights Reserved.</p>
+  <p>Contact us at info@animalsanctuary.com | Follow us on <a href="#">Facebook</a>, <a href="#">Twitter</a>, and <a href="#">Instagram</a>.</p>
+</div>
+<!-- Example without integrity attribute -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

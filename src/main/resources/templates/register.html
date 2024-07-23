@@ -7,7 +7,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
+<nav class="navbar navbar-expand-lg" th:fragment="header">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Animal Sanctuary</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data" role="form" th:action="@{/register/save}" th:object="${user}">
                     <div class="form-group mb-3">
-                        <label class="form-label">Firstname</label>
+                        <label class="form-label"></label>
                         <input class="form-control"
                                id="firstname"
                                name="firstname"
@@ -43,7 +43,7 @@
                         </p>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Lastname</label>
+                        <label class="form-label"></label>
                         <input class="form-control"
                                id="lastname"
                                name="lastname"
@@ -56,7 +56,7 @@
                         </p>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Username</label>
+                        <label class="form-label"></label>
                         <input class="form-control"
                                id="username"
                                name="username"
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Email</label>
+                        <label class="form-label"></label>
                         <input class="form-control"
                                id="email"
                                name="email"
@@ -83,7 +83,7 @@
                         </p>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Password</label>
+                        <label class="form-label"></label>
                         <input class="form-control"
                                id="password"
                                name="password"
@@ -95,10 +95,10 @@
                            th:if="${#fields.hasErrors('password')}">
                         </p>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="image" class="form-label">Profile Image</label>
-                        <input type="file" name="image" id="image" class="form-control" th:field="*{image}">
-                    </div>
+<!--                    <div class="form-group mb-3">-->
+<!--                        <label for="profileImage" class="form-label">Profile Image</label>-->
+<!--                        <input type="file" name="profileImage" id="profileImage" class="form-control" th:field="*{profile_img}">-->
+<!--                    </div>-->
                     <div class="form-group mb-3">
                         <button class="btn btn-primary" type="submit">Register</button>
                         <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>

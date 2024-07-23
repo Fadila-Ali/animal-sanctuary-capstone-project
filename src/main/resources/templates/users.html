@@ -10,15 +10,66 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
 </head>
+<style>
+    #body-overlay {
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+
+    .real-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        z-index: 4;
+        width: 300px;
+        height: 100%;
+        padding: .5rem 1rem;
+        box-shadow: 0 6px 12px rgba(107, 82, 82, 0.3);
+        background-color: white;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        transition: ease 0.2s;
+    }
+
+
+    body {
+
+        &.menu-open{
+            #body-overlay {
+                display: block;
+            }
+        }
+
+        &.menu-open {
+            .real-menu {
+                left: 0;
+            }
+        }
+    }
+    ul li {
+        list-style: none;
+        padding: 0.5rem 0;
+        font-size: 1.25rem;
+    }
+    a {
+        color: black;
+        text-decoration: none;
+    }
+</style>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Animal Sanctuary</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<nav class="navbar navbar-expand-lg navbar-light border-bottom">
+    <aside>
+        <div id="body-overlay"></div>
+        <nav class="real-menu" role="navigation">
+            <ul>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/register}" th:if="${not #authorization.expression('isAuthenticated()')}">Register</a>
                 </li>
@@ -44,31 +95,33 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}">Logout</a>
                 </li>
             </ul>
-        </div>
+        </nav>
+        <button id="open-menu" style="padding: 0 2rem; border: none; background: transparent"><img src="/media/burger-menu-svgrepo-com.svg" alt="menu" width="30"/></button>
+    </aside>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="text-align: center"><h2>Furry Friends Sanctuary</h2></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </nav>
-<div class="container">
+<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem">
     <div class="row">
-        <h1> Registered Users </h1>
+        <h3> Registered Users </h3>
     </div>
-    <table class="table table-striped table-bordered table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.firstname}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.lastname}"></td>
-            <td th:text="${user.email}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="">
+        <ul th:each="user: ${users}" class="" style="display: flex; gap: 1rem">
+            <li class="shadow p-3 rounded" style="display: flex; background: white; width: 70vw;">
+                <img style="height: 5rem;" src="data:image/png;base64,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" alt="profile"/>
+                <div>
+                    <h3 th:text="${user.firstname} + ${user.lastname}"></h3>
+                    <p th:text="${user.email}"></p>
+                    @<span th:text="${user.username}"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
+<script th:src="@{/js/sidebar.js}"></script>
 </html>
