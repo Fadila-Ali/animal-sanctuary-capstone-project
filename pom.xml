@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ali</groupId>
-    <artifactId>AnimalSanctuary</artifactId>
+    <artifactId>Ali_Fadila_Animal_Sanctuary</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>AnimalSanctuary</name>
     <description>AnimalSanctuary</description>
